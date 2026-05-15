@@ -1,0 +1,103 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; }
+
+:root {
+  --p1:#044D2C; --p2:#076B3E; --p3:#0A8A52; --p4:#0DAA66; --p5:#10C97A;
+  --pl:#E8F5EE; --pm:#C0E8D2; --pd:#022818;
+  --bg:#E6F2EC; --surface:#F0F9F4;
+  --t1:#0D1F17; --t2:#2E4A3A; --t3:#6B8878; --t4:#A8BDB5;
+  --red:#D63333; --red-l:#FEF0F0;
+  --amber:#D97706; --amber-l:#FFF7ED;
+  --blue:#1D6FA4; --blue-l:#EFF6FF;
+  --purple:#7C3AED; --purple-l:#F5F3FF;
+  --gold:#B45309; --gold-l:#FFFBEB;
+  --teal:#0E7490; --teal-l:#ECFEFF;
+  --pink:#BE185D; --pink-l:#FDF2F8;
+  --r1:6px; --r2:10px; --r3:14px; --r4:18px; --r5:24px; --r6:32px;
+  --s1:0 1px 3px rgba(0,0,0,.06), 0 2px 8px rgba(0,0,0,.04);
+  --s2:0 2px 6px rgba(0,0,0,.07), 0 6px 24px rgba(0,0,0,.06);
+  --s3:0 6px 20px rgba(0,0,0,.08), 0 20px 56px rgba(0,0,0,.07);
+  --sg:0 4px 20px rgba(4,77,44,.2);
+  --font:'Outfit', sans-serif;
+  --serif:'Playfair Display', serif;
+}
+
+html, body, #root {
+  height: 100%;
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--t1);
+  overflow: hidden;
+}
+
+button { font-family: var(--font); cursor: pointer; border: none; }
+input, select, textarea { font-family: var(--font); }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-thumb { background: var(--pm); border-radius: 3px; }
+
+/* Animations */
+@keyframes vIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+@keyframes fadeUp { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
+@keyframes treeIn { from { transform:scale(.5) translateY(30px); opacity:0; } to { transform:scale(1) translateY(0); opacity:1; } }
+@keyframes leafFloat { 0%,100% { transform:rotate(-5deg) translateY(0); } 50% { transform:rotate(5deg) translateY(-15px); } }
+@keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:.3; } }
+@keyframes spin { to { transform:rotate(360deg); } }
+@keyframes ping { 0%,100% { transform:scale(1); opacity:1; } 50% { transform:scale(1.3); opacity:.8; } }
+@keyframes mPop { from { transform:scale(.91) translateY(18px); opacity:0; } to { transform:scale(1) translateY(0); opacity:1; } }
+@keyframes ndrop { from { opacity:0; transform:translateY(-10px); } to { opacity:1; transform:translateY(0); } }
+
+/* ── MOBILE RESPONSIVE ── */
+@media (max-width: 767px) {
+  /* Grid fixes */
+  div[style*="grid-template-columns: 1fr 1fr"] {
+    grid-template-columns: 1fr 1fr !important;
+  }
+  /* Charts smaller on mobile */
+  div[style*="position:relative"][style*="height:200px"],
+  div[style*="position: relative"][style*="height: 200px"] {
+    height: 160px !important;
+  }
+  /* Cards padding */
+  div[style*="border-radius:24px"][style*="padding:22px"],
+  div[style*="border-radius: 24px"][style*="padding: 22px"] {
+    padding: 14px !important;
+    border-radius: 16px !important;
+  }
+  /* Font sizes */
+  body { font-size: 14px; }
+}
+
+/* Safe area support for notch phones */
+@supports (padding: max(0px)) {
+  .safe-top { padding-top: max(env(safe-area-inset-top), 0px); }
+  .safe-bottom { padding-bottom: max(env(safe-area-inset-bottom), 0px); }
+}
+
+/* ── MOBILE FIXES ── */
+@media (max-width: 767px) {
+  /* Grid cards: 2 columns on mobile */
+  .stats-row { grid-template-columns: 1fr 1fr !important; gap: 10px !important; }
+  /* Charts side by side stacked on mobile */
+  .dash-charts { grid-template-columns: 1fr !important; }
+  /* Investment grid */
+  .inv-grid { grid-template-columns: 1fr !important; }
+  /* Report grid */
+  .rp-body-grid { grid-template-columns: 1fr !important; }
+  /* Cards full width */
+  .card-full { grid-column: 1 / -1 !important; }
+  /* Text sizes */
+  body { font-size: 14px; }
+  input, select, textarea { font-size: 16px !important; } /* Prevents zoom on iOS */
+}
+
+/* Fix iOS tap highlight */
+button, a { -webkit-tap-highlight-color: transparent; }
+/* Fix iOS input zoom */
+input[type="text"], input[type="email"], input[type="password"], input[type="tel"], input[type="number"], select { font-size: 16px; }
+/* Smooth scroll */
+* { -webkit-overflow-scrolling: touch; }
+/* Safe area */
+@supports (padding: env(safe-area-inset-bottom)) {
+  .mobile-bottom-nav { padding-bottom: env(safe-area-inset-bottom) !important; }
+}
